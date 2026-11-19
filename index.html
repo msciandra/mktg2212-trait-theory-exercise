@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consumer Behavior: Personality & Trait Theory Assessment</title>
+  <!-- Google Fonts for elevated editorial typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --surface-hover: #e2e8f0;
+      --border: #cbd5e1;
+
+      /* Primary accents */
+      --accent-indigo: #2563eb;
+      --accent-teal: #0d9488;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --accent-blue: #0284c7;
+
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem 4rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: rgba(13, 148, 136, 0.12);
+      color: #0f766e;
+      border: 1px solid rgba(13, 148, 136, 0.35);
+      margin-bottom: 0.85rem;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Progress Tracker */
+    .progress-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: var(--surface);
+      padding: 0.6rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .nav-step {
+      flex: 1;
+      min-width: 130px;
+      padding: 0.6rem 0.75rem;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .nav-step.active {
+      background: var(--surface-card);
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+    }
+
+    .nav-step.completed {
+      color: var(--accent-teal);
+    }
+
+    .nav-step .step-counter {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .section-header {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .scale-legend {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Survey Questions */
+    .question-row {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .question-row:last-child {
+      border-bottom: none;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      color: #0f172a;
+    }
+
+    .question-text span.q-num {
+      color: var(--accent-indigo);
+      font-weight: 800;
+      margin-right: 0.4rem;
+    }
+
+    .likert-group {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.6rem;
+    }
+
+    .likert-btn {
+      position: relative;
+    }
+
+    .likert-btn input {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .likert-btn label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 0.2rem;
+      background: var(--surface-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .likert-btn label .sub-label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-top: 2px;
+      display: none;
+    }
+
+    @media(min-width: 600px) {
+      .likert-btn label .sub-label {
+        display: block;
+      }
+    }
+
+    .likert-btn input:hover + label {
+      background: var(--surface-hover);
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    .likert-btn input:checked + label {
+      background: var(--accent-indigo);
+      border-color: #1d4ed8;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .likert-btn input:checked + label .sub-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Actions */
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    button.btn {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary {
+      background: var(--surface-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-hover);
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-1px);
+    }
+
+    .error-alert {
+      background: #ffe4e6;
+      border: 1px solid #f43f5e;
+      color: #9f1239;
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    /* Results Dashboard */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    @media(min-width: 768px) {
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    .score-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .score-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .score-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .score-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      background: #e0f2fe;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid #bae6fd;
+    }
+
+    .score-meter {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0.85rem 0;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      width: 0%;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .score-level-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .level-low { color: #0284c7; }
+    .level-mod { color: #d97706; }
+    .level-high { color: #e11d48; }
+
+    .score-desc {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .marketing-takeaway {
+      background: #f1f5f9;
+      border-left: 4px solid var(--accent-indigo);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      .progress-nav, .button-row, header .badge {
+        display: none !important;
+      }
+      .card, .score-card {
+        background: #ffffff;
+        border: 1px solid #cccccc;
+        box-shadow: none;
+        color: #000000;
+        break-inside: avoid;
+      }
+      .score-card-title, h1, h2, .section-title {
+        color: #000000 !important;
+      }
+      .score-desc, .subtitle, .section-desc {
+        color: #333333;
+      }
+      .score-fill {
+        background: #2563eb;
+      }
+      .score-meter {
+        background: #e2e8f0;
+      }
+      .marketing-takeaway {
+        background: #f1f5f9;
+        color: #1e293b;
+        border-left: 3px solid #2563eb;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">Trait Theory of Personality Exercise MKTG 2212</div>
+      <h1>Personality Trait Profiler</h1>
+      <p class="subtitle">Complete the validated scales below to analyze your individual traits and discover their implications for consumer decision-making.</p>
+    </header>
+
+    <!-- Navigation Steps -->
+    <nav class="progress-nav" id="navSteps">
+      <button class="nav-step active" onclick="goToStep(0)">
+        <span class="step-counter">Part 1</span>
+        <span>Big-Five Traits</span>
+      </button>
+      <button class="nav-step" onclick="goToStep(1)">
+        <span class="step-counter">Part 2</span>
+        <span>Need for Cognition</span>
+      </button>
+      <button class="nav-step" onclick="goToStep(2)">
+        <span class="step-counter">Part 3</span>
+        <span>Need for Uniqueness</span>
+      </button>
+      <button class="nav-step" onclick="goToStep(3)">
+        <span class="step-counter">Part 4</span>
+        <span>Risk Aversion</span>
+      </button>
+    </nav>
+
+    <!-- Form Container -->
+    <form id="assessmentForm">
+      
+      <!-- STEP 1: BIG FIVE -->
+      <section class="card step-section" id="step0">
+        <div class="section-header">
+          <h2 class="section-title">1. Ten-Item Personality Inventory (TIPI)</h2>
+          <p class="section-desc">Rate the extent to which the pair of traits applies to you, even if one characteristic applies more strongly than the other.</p>
+          <div class="scale-legend">
+            <span>1 = Disagree Strongly</span>
+            <span>2 = Disagree A Little</span>
+            <span>3 = Neither</span>
+            <span>4 = Agree A Little</span>
+            <span>5 = Agree Strongly</span>
+          </div>
+        </div>
+        <div id="big5-container"></div>
+        <div class="error-alert" id="error0">Please answer all 10 questions before moving forward.</div>
+        <div class="button-row">
+          <div></div>
+          <button type="button" class="btn btn-primary" onclick="validateAndNext(0)">Next: Need for Cognition &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: NEED FOR COGNITION -->
+      <section class="card step-section" id="step1" style="display:none;">
+        <div class="section-header">
+          <h2 class="section-title">2. Need for Cognition Scale (NFC)</h2>
+          <p class="section-desc">Assess your tendency to engage in and enjoy effortful analytical thinking.</p>
+          <div class="scale-legend">
+            <span>1 = Strongly Disagree</span>
+            <span>2 = Disagree</span>
+            <span>3 = Neutral</span>
+            <span>4 = Agree</span>
+            <span>5 = Strongly Agree</span>
+          </div>
+        </div>
+        <div id="nfc-container"></div>
+        <div class="error-alert" id="error1">Please answer all 18 items in this section.</div>
+        <div class="button-row">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(0)">&larr; Back</button>
+          <button type="button" class="btn btn-primary" onclick="validateAndNext(1)">Next: Need for Uniqueness &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: NEED FOR UNIQUENESS -->
+      <section class="card step-section" id="step2" style="display:none;">
+        <div class="section-header">
+          <h2 class="section-title">3. Consumer Need for Uniqueness (CNFU)</h2>
+          <p class="section-desc">Measure how you pursue differentness relative to others through product acquisition, utilization, and disposition.</p>
+          <div class="scale-legend">
+            <span>1 = Strongly Disagree</span>
+            <span>2 = Disagree</span>
+            <span>3 = Neutral</span>
+            <span>4 = Agree</span>
+            <span>5 = Strongly Agree</span>
+          </div>
+        </div>
+        <div id="nfu-container"></div>
+        <div class="error-alert" id="error2">Please answer all 31 items in this section.</div>
+        <div class="button-row">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(1)">&larr; Back</button>
+          <button type="button" class="btn btn-primary" onclick="validateAndNext(2)">Next: Consumer Risk Aversion &rarr;</button>
+        </div>
+      </section>
+
+      <!-- STEP 4: RISK AVERSION -->
+      <section class="card step-section" id="step3" style="display:none;">
+        <div class="section-header">
+          <h2 class="section-title">4. Consumer Risk Aversion</h2>
+          <p class="section-desc">Evaluate your caution and hesitation in trying unfamiliar products, brands, or experiences.</p>
+          <div class="scale-legend">
+            <span>1 = Strongly Disagree</span>
+            <span>2 = Disagree</span>
+            <span>3 = Neutral</span>
+            <span>4 = Agree</span>
+            <span>5 = Strongly Agree</span>
+          </div>
+        </div>
+        <div id="risk-container"></div>
+        <div class="error-alert" id="error3">Please answer all 9 items in this section.</div>
+        <div class="button-row">
+          <button type="button" class="btn btn-secondary" onclick="goToStep(2)">&larr; Back</button>
+          <button type="button" class="btn btn-success" onclick="calculateAndDisplayResults()">Generate My Personality Profile &rarr;</button>
+        </div>
+      </section>
+    </form>
+
+    <!-- RESULTS PAGE -->
+    <section class="card" id="resultsSection" style="display:none;">
+      <div class="section-header">
+        <div class="badge">Assessment Complete</div>
+        <h2 class="section-title">Your Consumer Trait Profile</h2>
+        <p class="section-desc">Below are your calculated scale averages (1 = Low, 5 = High) along with key behavioral implications.</p>
+      </div>
+
+      <div class="results-grid" id="resultsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="button-row" style="margin-top:2.5rem;">
+        <button type="button" class="btn btn-secondary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button type="button" class="btn btn-secondary" id="refreshBtn" onclick="refreshBenchmarks()">🔄 Refresh Class Benchmarks</button>
+        <button type="button" class="btn btn-primary" onclick="resetForm()">Retake Assessment</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    /* =========================================================================
+       DATA DEFINITION (MATCHING EXCEL FILE & REVERSE SCORING RULES)
+       ========================================================================= */
+
+    const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxfNH4bYMmXkvZbBG7VhPf4jzcLGwfFooSE6j1qlRECN4mXMva5DVKGJq0aLXbmeFdNwg/exec";
+
+    // Global variable to hold user profile in memory
+    let currentProfile = null;
+
+    // Big Five (TIPI) - 10 Items
+    const BIG_FIVE_ITEMS = [
+      { num: 1, text: "I see myself as someone who is reserved", trait: "Extraversion", reverse: true },
+      { num: 2, text: "I see myself as someone who is generally trusting", trait: "Agreeableness", reverse: false },
+      { num: 3, text: "I see myself as someone who tends to be lazy", trait: "Conscientiousness", reverse: true },
+      { num: 4, text: "I see myself as someone who is relaxed, handles stress well", trait: "Neuroticism", reverse: true },
+      { num: 5, text: "I see myself as someone who has few artistic interests", trait: "Openness", reverse: true },
+      { num: 6, text: "I see myself as someone who is outgoing, sociable", trait: "Extraversion", reverse: false },
+      { num: 7, text: "I see myself as someone who tends to find fault in others", trait: "Agreeableness", reverse: true },
+      { num: 8, text: "I see myself as someone who does a thorough job", trait: "Conscientiousness", reverse: false },
+      { num: 9, text: "I see myself as someone who gets nervous easily", trait: "Neuroticism", reverse: false },
+      { num: 10, text: "I see myself as someone who has an active imagination", trait: "Openness", reverse: false }
+    ];
+
+    // Need For Cognition (18 Items) - Reverse scored: 3, 4, 5, 7, 8, 9, 12, 16, 17
+    const NFC_ITEMS = [
+      { num: 1, text: "I would prefer complex to simple problems.", reverse: false },
+      { num: 2, text: "I like to have the responsibility of handling a situation that requires a lot of thinking.", reverse: false },
+      { num: 3, text: "Thinking is not my idea of fun.", reverse: true },
+      { num: 4, text: "I would rather do something that requires little thought than something that is sure to challenge my thinking abilities.", reverse: true },
+      { num: 5, text: "I try to anticipate and avoid situations where there is likely a chance I will have to think in depth about something.", reverse: true },
+      { num: 6, text: "I find satisfaction in deliberating hard and for long hours.", reverse: false },
+      { num: 7, text: "I only think as hard as I have to.", reverse: true },
+      { num: 8, text: "I prefer to think about small, daily projects to long-term ones.", reverse: true },
+      { num: 9, text: "I like tasks that require little thought once I’ve learned them.", reverse: true },
+      { num: 10, text: "The idea of relying on thought to make my way to the top appeals to me.", reverse: false },
+      { num: 11, text: "I really enjoy a task that involves coming up with new solutions to problems.", reverse: false },
+      { num: 12, text: "Learning new ways to think doesn’t excite me very much.", reverse: true },
+      { num: 13, text: "I prefer my life to be filled with puzzles that I must solve.", reverse: false },
+      { num: 14, text: "The notion of thinking abstractly is appealing to me.", reverse: false },
+      { num: 15, text: "I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought.", reverse: false },
+      { num: 16, text: "I feel relief rather than satisfaction after completing a task that required a lot of mental effort.", reverse: true },
+      { num: 17, text: "It’s enough for me that something gets the job done; I don’t care how or why it works.", reverse: true },
+      { num: 18, text: "I usually end up deliberating about issues even when they do not affect me personally.", reverse: false }
+    ];
+
+    // Need for Uniqueness (31 Items) - Reverse scored: None
+    const NFU_ITEMS = [
+      { num: 1, text: "I collect unusual products as a way of telling people I’m different." },
+      { num: 2, text: "I have sometimes purchased unusual products or brands as a way to create a more distinctive personal image." },
+      { num: 3, text: "I often look for one-of-a-kind products or brands so that I create a style that is all my own." },
+      { num: 4, text: "Often when buying merchandise, an important goal is to find something that communicates my uniqueness." },
+      { num: 5, text: "I often combine possessions in such a way that I create a personal image for myself that can’t be duplicated." },
+      { num: 6, text: "I often try to find a more interesting version of run-of-the-mill products because I enjoy being original." },
+      { num: 7, text: "I actively seek to develop my personal uniqueness by buying special products or brands." },
+      { num: 8, text: "Having an eye for products that are interesting and unusual assists me in establishing a distinctive image." },
+      { num: 9, text: "The products and brands that I like best are the ones that express my individuality." },
+      { num: 10, text: "I often think of the things I buy and do in terms of how I can use them to shape a more unusual personal image." },
+      { num: 11, text: "I’m often on the lookout for new products or brands that will add to my personal uniqueness." },
+      { num: 12, text: "When dressing, I have sometimes dared to be different in ways that others are likely to disapprove." },
+      { num: 13, text: "As far as I’m concerned, when it comes to the products I buy and the situations in which I use them, customs and rules are made to be broken." },
+      { num: 14, text: "I often dress unconventionally even when it’s likely to offend others." },
+      { num: 15, text: "I rarely act in agreement with what others think are the right things to buy." },
+      { num: 16, text: "Concern for being out of place doesn’t prevent me from wearing what I want to wear." },
+      { num: 17, text: "When it comes to the products I buy and the situations in which I use them, I have often broken customs and rules." },
+      { num: 18, text: "I have often violated the understood rules of my social group regarding what to buy or own." },
+      { num: 19, text: "I have often gone against the understood rules of my social group regarding when and how certain products are properly used." },
+      { num: 20, text: "I enjoy challenging the prevailing taste of people I know by buying something they wouldn’t seem to accept." },
+      { num: 21, text: "If someone hinted that I had been dressing inappropriately for a social situation, I would continue dressing in the same manner." },
+      { num: 22, text: "When I dress differently, I’m often aware that others think I’m peculiar, but I don’t care." },
+      { num: 23, text: "When products or brands I like become extremely popular, I lose interest in them." },
+      { num: 24, text: "I avoid products or brands that have already been accepted and purchased by the average consumer." },
+      { num: 25, text: "When a product I own becomes popular among the general population, I begin using it less." },
+      { num: 26, text: "I often try to avoid products or brands that I know are bought by the general population." },
+      { num: 27, text: "As a rule, I dislike products or brands that are customarily purchased by everyone." },
+      { num: 28, text: "I give up wearing fashions I’ve purchased once they become popular among the general public." },
+      { num: 29, text: "The more commonplace a product or brand is among the general population, the less interested I am in buying it." },
+      { num: 30, text: "Products don’t seem to hold much value for me when they are purchased regularly by everyone." },
+      { num: 31, text: "When a style of clothing I own becomes too commonplace, I usually quit wearing it." }
+    ];
+
+    // Consumer Risk Aversion (9 Items) - Reverse scored: 1, 2, 5, 9
+    const RISK_ITEMS = [
+      { num: 1, text: "When I eat out, I like to try the most unusual items the restaurant serves, even if I am not sure I would like them.", reverse: true },
+      { num: 2, text: "I am the kind of person who would try any new product once.", reverse: true },
+      { num: 3, text: "When I go to a restaurant, I feel it is safer to order dishes I am familiar with.", reverse: false },
+      { num: 4, text: "I am very cautious in trying new/different products.", reverse: false },
+      { num: 5, text: "Even for an important date or dinner, I wouldn't be wary of trying a new or unfamiliar restaurant.", reverse: true },
+      { num: 6, text: "I would rather stick with a brand I usually buy than try something I am not very sure.", reverse: false },
+      { num: 7, text: "I never buy something I don't know about at the risk of making a mistake.", reverse: false },
+      { num: 8, text: "If I buy electronics, I will buy only well-established brands.", reverse: false },
+      { num: 9, text: "I enjoy taking chances in buying unfamiliar brands just to get some variety in my purchases.", reverse: true }
+    ];
+
+    /* =========================================================================
+       API INTEGRATION (GOOGLE SHEETS APPS SCRIPT)
+       ========================================================================= */
+
+    async function sendResultsToSheet(payload) {
+      try {
+        await fetch(SHEET_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        console.error("Error sending data to sheet:", e);
+      }
+    }
+
+    async function getClassMeans() {
+      try {
+        const res = await fetch(SHEET_ENDPOINT);
+        const data = await res.json();
+        return data;
+      } catch (e) {
+        console.error("Error fetching class means:", e);
+        return null;
+      }
+    }
+
+    /* =========================================================================
+       RENDER FUNCTIONS
+       ========================================================================= */
+
+    function renderLikertQuestion(prefix, item, scaleLabels = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]) {
+      return `
+        <div class="question-row" id="row_${prefix}_${item.num}">
+          <div class="question-text">
+            <span class="q-num">${item.num}.</span> ${item.text}
+          </div>
+          <div class="likert-group">
+            ${[1, 2, 3, 4, 5].map(val => `
+              <div class="likert-btn">
+                <input type="radio" name="${prefix}_${item.num}" id="${prefix}_${item.num}_${val}" value="${val}">
+                <label for="${prefix}_${item.num}_${val}">
+                  ${val}
+                  <span class="sub-label">${scaleLabels[val-1]}</span>
+                </label>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function initForm() {
+      // 1. Big Five
+      const big5Container = document.getElementById("big5-container");
+      big5Container.innerHTML = BIG_FIVE_ITEMS.map(item => 
+        renderLikertQuestion("b5", item, ["Disagree Strongly", "Disagree A Little", "Neither", "Agree A Little", "Agree Strongly"])
+      ).join('');
+
+      // 2. NFC
+      const nfcContainer = document.getElementById("nfc-container");
+      nfcContainer.innerHTML = NFC_ITEMS.map(item => renderLikertQuestion("nfc", item)).join('');
+
+      // 3. NFU
+      const nfuContainer = document.getElementById("nfu-container");
+      nfuContainer.innerHTML = NFU_ITEMS.map(item => renderLikertQuestion("nfu", item)).join('');
+
+      // 4. Risk
+      const riskContainer = document.getElementById("risk-container");
+      riskContainer.innerHTML = RISK_ITEMS.map(item => renderLikertQuestion("risk", item)).join('');
+    }
+
+    /* =========================================================================
+       STEP NAVIGATION & VALIDATION
+       ========================================================================= */
+
+    let currentStep = 0;
+
+    function goToStep(stepIndex) {
+      document.querySelectorAll('.step-section').forEach((sec, idx) => {
+        sec.style.display = idx === stepIndex ? 'block' : 'none';
+      });
+      document.querySelectorAll('.nav-step').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === stepIndex);
+      });
+      document.getElementById('resultsSection').style.display = 'none';
+      currentStep = stepIndex;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateStep(stepIndex) {
+      let valid = true;
+      let items, prefix;
+
+      if (stepIndex === 0) { items = BIG_FIVE_ITEMS; prefix = "b5"; }
+      else if (stepIndex === 1) { items = NFC_ITEMS; prefix = "nfc"; }
+      else if (stepIndex === 2) { items = NFU_ITEMS; prefix = "nfu"; }
+      else if (stepIndex === 3) { items = RISK_ITEMS; prefix = "risk"; }
+
+      for (let item of items) {
+        const checked = document.querySelector(`input[name="${prefix}_${item.num}"]:checked`);
+        const row = document.getElementById(`row_${prefix}_${item.num}`);
+        if (!checked) {
+          valid = false;
+          if (row) row.style.borderLeft = "3px solid var(--accent-rose)";
+        } else {
+          if (row) row.style.borderLeft = "none";
+        }
+      }
+
+      const alert = document.getElementById(`error${stepIndex}`);
+      if (alert) alert.style.display = valid ? 'none' : 'block';
+
+      if (valid) {
+        document.querySelectorAll('.nav-step')[stepIndex].classList.add('completed');
+      }
+
+      return valid;
+    }
+
+    function validateAndNext(stepIndex) {
+      if (validateStep(stepIndex)) {
+        goToStep(stepIndex + 1);
+      }
+    }
+
+    /* =========================================================================
+       SCORING LOGIC & INTERPRETATION
+       ========================================================================= */
+
+    function getVal(name, reverse) {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      const raw = el ? parseInt(el.value, 10) : 3;
+      return reverse ? (6 - raw) : raw;
+    }
+
+    async function calculateAndDisplayResults() {
+      if (!validateStep(3)) return;
+
+      // 1. Big Five Subscales
+      const extraversion = (getVal("b5_1", true) + getVal("b5_6", false)) / 2;
+      const agreeableness = (getVal("b5_2", false) + getVal("b5_7", true)) / 2;
+      const conscientiousness = (getVal("b5_3", true) + getVal("b5_8", false)) / 2;
+      const neuroticism = (getVal("b5_4", true) + getVal("b5_9", false)) / 2;
+      const openness = (getVal("b5_5", true) + getVal("b5_10", false)) / 2;
+
+      // 2. Need for Cognition (18 items)
+      let nfcSum = 0;
+      NFC_ITEMS.forEach(it => { nfcSum += getVal(`nfc_${it.num}`, it.reverse); });
+      const nfcAvg = nfcSum / 18;
+
+      // 3. Need for Uniqueness (31 items, no reverse)
+      let nfuSum = 0;
+      NFU_ITEMS.forEach(it => { nfuSum += getVal(`nfu_${it.num}`, false); });
+      const nfuAvg = nfuSum / 31;
+
+      // 4. Consumer Risk Aversion (9 items)
+      let riskSum = 0;
+      RISK_ITEMS.forEach(it => { riskSum += getVal(`risk_${it.num}`, it.reverse); });
+      const riskAvg = riskSum / 9;
+
+      // 5. Construct Profile Array
+      const profile = [
+        {
+          name: "Need for Cognition (NFC)",
+          score: nfcAvg,
+          span2: true,
+          lowText: "Low NFC — You prefer intuitive, fast heuristic-based buying decisions and respond best to simple visuals, celebrity endorsements, and clear emotional appeals.",
+          modText: "Moderate NFC — You balance intuitive gut decisions with analytical evaluation depending on product price and importance.",
+          highText: "High NFC — You actively seek out detailed product specs, comparison charts, and technical proof. You process central arguments rather than peripheral cues.",
+          takeaway: "Marketing Focus: Central route (high NFC) vs. Peripheral route (low NFC) to persuasion in advertising."
+        },
+        {
+          name: "Consumer Need for Uniqueness (CNFU)",
+          score: nfuAvg,
+          span2: true,
+          lowText: "Low Uniqueness — You gravitate towards mainstream, socially accepted brands and popular community trends.",
+          modText: "Moderate Uniqueness — You value personal taste but generally prefer socially normative options.",
+          highText: "High Uniqueness — You actively avoid mass-market items (counter-conformity) and seek out niche, customizable, or artisanal brands that establish a distinct identity.",
+          takeaway: "Marketing Focus: Mass market adoption vs. niche positioning, exclusivity cues, and customizability."
+        },
+        {
+          name: "Consumer Risk Aversion",
+          score: riskAvg,
+          span2: true,
+          lowText: "Low Risk Aversion (Risk-Seeking) — You are an early adopter eager to try novel brands, unfamiliar menu items, and untested technologies.",
+          modText: "Moderate Risk Aversion — You try new products occasionally when risks are manageable or brand names are somewhat familiar.",
+          highText: "High Risk Aversion — You are brand-loyal and stick to proven products to avoid purchase regret. You place heavy value on warranties and money-back guarantees.",
+          takeaway: "Marketing Focus: Perceived risk reduction (free trials, return policies, recognized brand trust)."
+        },
+        {
+          name: "Extraversion (Big Five)",
+          score: extraversion,
+          lowText: "More Introverted — Preference for solitary, digital, or low-stimulation shopping environments.",
+          modText: "Balanced — Comfortable in both social and independent buying situations.",
+          highText: "More Extraverted — Drawn to experiential retail, social consumption, and brands that enhance social visibility.",
+          takeaway: "Marketing Focus: Social proof, experiential marketing, and group promotions."
+        },
+        {
+          name: "Openness to Experience (Big Five)",
+          score: openness,
+          lowText: "Conventional & Pragmatic — Prefers familiar products, traditional styling, and proven reliability.",
+          modText: "Selective Explorer — Open to novelty in specific categories of interest.",
+          highText: "Curious & Creative — Enjoys avant-garde design, exotic flavors, and cutting-edge brand concepts.",
+          takeaway: "Marketing Focus: Novelty positioning and artistic/aesthetic packaging."
+        },
+        {
+          name: "Conscientiousness (Big Five)",
+          score: conscientiousness,
+          lowText: "Spontaneous & Impulsive — More susceptible to impulse purchases and short-term promotions.",
+          modText: "Balanced Planner — Mixes structured budgeting with occasional spontaneous splurges.",
+          highText: "Organized & Disciplined — Researches prices, reads reviews thoroughly, and plans purchases carefully.",
+          takeaway: "Marketing Focus: Subscription loyalty programs, utilitarian value, and transparent pricing."
+        },
+        {
+          name: "Agreeableness (Big Five)",
+          score: agreeableness,
+          lowText: "Skeptical & Competitive — Looks for personal competitive advantages, hard bargains, and verifies claims critically.",
+          modText: "Cooperative — Appreciates friendly service and ethical brand practices.",
+          highText: "Empathetic & Trusting — Highly receptive to Cause-Related Marketing (CRM), fair trade, and brand philanthropy.",
+          takeaway: "Marketing Focus: Corporate Social Responsibility (CSR) and relationship marketing."
+        },
+        {
+          name: "Neuroticism / Stress Sensitivity",
+          score: neuroticism,
+          lowText: "Emotionally Resilient — Confident shopper with low post-purchase anxiety or cognitive dissonance.",
+          modText: "Moderate Sensitivity — Occasional concern over major financial commitments.",
+          highText: "Anxiety-Prone — Vulnerable to post-purchase regret (buyer's remorse); responds to reassurance and security guarantees.",
+          takeaway: "Marketing Focus: Post-purchase reassurance, clear return policies, and anxiety-relieving messaging."
+        }
+      ];
+
+      // Save to memory for subsequent non-duplicate refreshes
+      currentProfile = profile;
+
+      // 6. Send payload to Google Sheets (POST only once upon submit)
+      const payload = {
+        nfc: nfcAvg,
+        nfu: nfuAvg,
+        risk: riskAvg,
+        extraversion: extraversion,
+        agreeableness: agreeableness,
+        conscientiousness: conscientiousness,
+        neuroticism: neuroticism,
+        openness: openness
+      };
+      sendResultsToSheet(payload);
+
+      // 7. Fetch class means and render
+      const classMeans = await getClassMeans();
+      renderResultsGrid(profile, classMeans);
+
+      // 8. Show results, hide questionnaire
+      document.querySelectorAll('.step-section').forEach(sec => sec.style.display = 'none');
+      document.getElementById('navSteps').style.display = 'none';
+      document.getElementById('resultsSection').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function refreshBenchmarks() {
+      if (!currentProfile) return;
+      const btn = document.getElementById("refreshBtn");
+      if (btn) btn.textContent = "⏳ Updating...";
+
+      const classMeans = await getClassMeans();
+      renderResultsGrid(currentProfile, classMeans);
+
+      if (btn) btn.textContent = "🔄 Refresh Class Benchmarks";
+    }
+
+    function renderResultsGrid(profile, classMeans) {
+      const container = document.getElementById("resultsGrid");
+      container.innerHTML = profile.map(item => {
+        let levelClass = "level-mod";
+        let levelLabel = "Moderate (2.50 – 3.49)";
+        let desc = item.modText;
+
+        if (item.score < 2.5) {
+          levelClass = "level-low";
+          levelLabel = "Low (1.00 – 2.49)";
+          desc = item.lowText;
+        } else if (item.score >= 3.5) {
+          levelClass = "level-high";
+          levelLabel = "High (3.50 – 5.00)";
+          desc = item.highText;
+        }
+
+        const pct = ((item.score - 1) / 4) * 100;
+
+        // Build "vs class" benchmark if class data exists (n >= 2)
+        let vsClassText = "";
+        if (classMeans && typeof classMeans.count !== "undefined" && classMeans.count >= 2) {
+          let key = null;
+          if (item.name.includes("Need for Cognition")) key = "nfc";
+          else if (item.name.includes("Uniqueness")) key = "nfu";
+          else if (item.name.includes("Risk")) key = "risk";
+          else if (item.name.includes("Extraversion")) key = "extraversion";
+          else if (item.name.includes("Agreeableness")) key = "agreeableness";
+          else if (item.name.includes("Conscientiousness")) key = "conscientiousness";
+          else if (item.name.includes("Neuroticism") || item.name.includes("Stress Sensitivity")) key = "neuroticism";
+          else if (item.name.includes("Openness")) key = "openness";
+
+          if (key && classMeans[key] !== null) {
+            const mean = classMeans[key];
+            const diff = item.score - mean;
+
+            let relation = "around";
+            if (diff > 0.20) relation = "above";
+            if (diff > 0.55) relation = "well above";
+            if (diff < -0.20) relation = "below";
+            if (diff < -0.55) relation = "well below";
+
+            vsClassText = `<div style="margin-top: 0.75rem; padding: 0.55rem 0.85rem; background: #e0f2fe; border-radius: 6px; font-size: 0.85rem; color: #0369a1; border-left: 4px solid #0284c7; line-height: 1.4;">
+              📊 <strong>Class Benchmark:</strong> Your score (${item.score.toFixed(2)}) is <strong>${relation}</strong> the class average (${mean.toFixed(2)} | <em>n</em> = ${classMeans.count}).
+            </div>`;
+          }
+        }
+
+        return `
+          <div class="score-card ${item.span2 ? 'grid-span-2' : ''}">
+            <div>
+              <div class="score-card-header">
+                <div class="score-card-title">${item.name}</div>
+                <div class="score-badge">${item.score.toFixed(2)}</div>
+              </div>
+              <div class="score-meter">
+                <div class="score-fill" style="width: ${pct}%;"></div>
+              </div>
+              <div class="score-level-label ${levelClass}">${levelLabel}</div>
+              <div class="score-desc">${desc}</div>
+              ${vsClassText}
+            </div>
+            ${item.takeaway ? `<div class="marketing-takeaway">💡 <strong>CB Insight:</strong> ${item.takeaway}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function resetForm() {
+      document.getElementById("assessmentForm").reset();
+      currentProfile = null;
+      document.querySelectorAll('.nav-step').forEach(btn => btn.classList.remove('completed'));
+      document.getElementById('navSteps').style.display = 'flex';
+      goToStep(0);
+    }
+
+    // Initialize the scales when DOM is loaded
+    document.addEventListener("DOMContentLoaded", initForm);
+  </script>
+</body>
+</html>
